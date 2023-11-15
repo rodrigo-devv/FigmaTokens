@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Create input JSON
-      id: create-json
-      uses: jsdaniell/create-json@1.1.2
-      with:
-        name: ${{ github.event.client_payload.filename}}
-        json: ${{ github.event.client_payload.tokens}}
-        dir: 'input'
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: ${{ github.event.client_payload.filename }}
+          json: ${{ github.event.client_payload.tokens }}
+          dir: 'input'
 
       - name: Install Node.js
         uses: actions/setup-node@v3
