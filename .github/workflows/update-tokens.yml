@@ -14,8 +14,8 @@ jobs:
         id: create-json
         uses: jsdaniell/create-json@1.1.2
         with:
-          name: ${{ github.event.client_payload.filename }}
-          json: ${{ github.event.client_payload.tokens }}
+          name: ${{ github.event.client_payload.filename}}
+          json: ${{ github.event.client_payload.tokens}}
           dir: 'input'
 
       - name: Install Node.js
@@ -30,12 +30,11 @@ jobs:
         run: npm run build
 
       - name: Create PR
-        run: |
-          peter-evans/create-pull-request@v4 \
-            --commit-message "style: Update design tokens" \
-            --title "${{ github.event.client_payload.commitMessage || 'Update design tokens' }}" \
-            --body "Design tokens have been updated via Figma and need to be reviewed."
+        run: peter-evans/create-pull-request@v4
+        with: 
+          commit-message: "style: Update design tokens"
+          title: ${{ github.event.client_payload.commitMessage || 'Update design tokens' }}
+          body: "Design tokens have been updated via Figma and need to be reviewed."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: 'master'
-
